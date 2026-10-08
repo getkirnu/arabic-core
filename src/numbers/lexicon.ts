@@ -7,8 +7,9 @@
  *   3–10     → number (opposite gender) + genitive plural  ثلاثة آلاف · ثلاث هللات
  *   11–99    → number + accusative singular (tamyiz)       أحد عشر ألفاً · خمسون هللة
  *   ×100 (last two digits 00) → number + genitive singular مئة ألف · ثلاثة آلاف ريال
- * For larger numbers the noun follows the LAST part (strict MSA): 102 thousand → مئة وألفان.
- * A dual directly followed by its noun takes the construct form: مئتا ألف · ألفا ريال.
+ * For larger numbers the noun follows the LAST part, except that a scale with hundreds + 1 or 2 repeats the scale
+ * word so the amount can't be read as a sum: 101 thousand → مئة ألف وألف, 102 thousand → مئة ألف وألفان.
+ * A noun directly following the number puts the last scale in construct: مئتا ألف · ألفا ريال · أحد عشر ألف ريال.
  */
 
 export type Gender = 'masculine' | 'feminine';
@@ -139,11 +140,16 @@ export function countNoun(n: number, noun: CountedNoun, c: GrammaticalCase, cons
 
   let tail: string;
   if (r === 1) tail = noun.one[c];
-  else if (r === 2) tail = (construct && rest === 0 && noun.dualConstruct ? noun.dualConstruct : noun.dual)[c];
+  else if (r === 2) tail = (construct && noun.dualConstruct ? noun.dualConstruct : noun.dual)[c];
   else if (r <= 10) tail = `${belowHundred(r, noun.gender, c)} ${noun.plural}`;
-  else tail = `${belowHundred(r, noun.gender, c)} ${noun.singular.accusative}`;
+  // 11–99: tamyiz «ألفاً»; but followed by a noun the scale is in construct and loses tanween: أحد عشر ألفَ ريالٍ.
+  else tail = `${belowHundred(r, noun.gender, c)} ${construct ? noun.singular.nominative : noun.singular.accusative}`;
 
-  return rest > 0 ? integerWords(rest, noun.gender, c) + AND + tail : tail;
+  if (rest === 0) return tail;
+  // A scale with hundreds + 1 or 2 repeats the scale word, so the amount can't be read as a sum:
+  // 101,000 → مئة ألف وألف (not مئة وألف, which reads as 1,100); 102,000 → مئة ألف وألفان.
+  if (r <= 2 && SCALES.includes(noun)) return `${integerWords(rest, noun.gender, c, true)} ${noun.singular.genitive}${AND}${tail}`;
+  return integerWords(rest, noun.gender, c) + AND + tail;
 }
 
 /** "مئة" (modern, default) or "مائة" (classic, common on Gulf cheques). */

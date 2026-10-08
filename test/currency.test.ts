@@ -50,3 +50,21 @@ describe('toMinorUnits', () => {
     expect(toMinorUnits(parseNumberInput('7'), 3)).toEqual({ major: 7, minor: 0 });
   });
 });
+
+describe('scale words before the currency noun (reviewed 2026-10-08)', () => {
+  it('drops the tanween of ألف/مليون when the currency follows', () => {
+    expect(currencyToWords('11000', 'SAR')).toBe('أحد عشر ألف ريال سعودي');
+    expect(currencyToWords('150000', 'SAR')).toBe('مئة وخمسون ألف ريال سعودي');
+    expect(currencyToWords('11000000', 'SAR')).toBe('أحد عشر مليون ريال سعودي');
+  });
+  it('repeats the scale for hundreds + 1 or 2 so the amount cannot read as a sum', () => {
+    expect(currencyToWords('101000', 'SAR')).toBe('مئة ألف وألف ريال سعودي');
+    expect(currencyToWords('102000', 'SAR')).toBe('مئة ألف وألفا ريال سعودي');
+    expect(currencyToWords('102500', 'SAR')).toBe('مئة ألف وألفان وخمسمئة ريال سعودي');
+  });
+  it('leaves the other forms unchanged', () => {
+    expect(currencyToWords('2000', 'SAR')).toBe('ألفا ريال سعودي');
+    expect(currencyToWords('3000', 'SAR')).toBe('ثلاثة آلاف ريال سعودي');
+    expect(currencyToWords('1250.50', 'SAR')).toBe('ألف ومئتان وخمسون ريالاً سعودياً وخمسون هللة');
+  });
+});

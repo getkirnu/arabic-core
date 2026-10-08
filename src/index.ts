@@ -1,5 +1,5 @@
 // Public API of @kirnu/arabic-core.
-export const VERSION = '0.1.0';
+export const VERSION = '0.1.1';
 
 export { convertNumerals, toWesternDigits } from './text/numerals';
 export type { NumeralDirection, ConvertNumeralsOptions } from './text/numerals';

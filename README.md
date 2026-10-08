@@ -76,7 +76,8 @@ Every number + noun phrase (including ألف / مليون / مليار and curre
 | 11–99 | number + accusative singular (tamyiz) | أحد عشر ألفاً · خمسون هللة |
 | whole hundreds (last two digits 00) | number + genitive singular | مئة ألف · ثلاثة آلاف ريال |
 
-- For counts above 100, the noun follows the **last** part (strict MSA): 102,000 → «مئة وألفان».
+- For counts above 100, the noun follows the **last** part, but a scale with hundreds + 1 or 2 repeats the scale word so the amount can't be read as a sum: 101,000 → «مئة ألف وألف», 102,000 → «مئة ألف وألفان».
+- Before a counted noun the last scale is in construct: 11,000 SAR → «أحد عشر ألف ريال سعودي» (the number alone stays «أحد عشر ألفاً»).
 - A dual directly followed by its noun takes the construct form: «مئتا ألف», «ألفا ريال».
 - Thousands, millions and billions (مليار) are masculine nouns, so their counts always use the masculine-noun form.
 - All expected outputs are tracked in `test/fixtures/tafgeet.cases.ts` with status `TODO-VERIFY` until a native Arabic editor approves them (see `EDITOR-REVIEW.md`).

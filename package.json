@@ -1,6 +1,6 @@
 {
   "name": "@kirnu/arabic-core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Arabic number-to-words (tafgeet) with correct grammar, currency amounts in words, tashkeel removal, Arabic normalisation and Umm al-Qura Hijri dates. No dependencies, no DOM.",
   "license": "MIT",
   "author": "Kirnu (https://getkirnu.com)",
