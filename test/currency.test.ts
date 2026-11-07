@@ -68,3 +68,13 @@ describe('scale words before the currency noun (reviewed 2026-10-08)', () => {
     expect(currencyToWords('1250.50', 'SAR')).toBe('ألف ومئتان وخمسون ريالاً سعودياً وخمسون هللة');
   });
 });
+
+describe('reported in the Hugging Face review (2026-11-07)', () => {
+  it('11–99 thousand before the currency is in construct (no tanween)', () => {
+    expect(currencyToWords('15000', 'SAR')).toBe('خمسة عشر ألف ريال سعودي');
+    expect(currencyToWords('11000', 'EGP')).toBe('أحد عشر ألف جنيه مصري');
+  });
+  it('accusative «واحداً» as the unit of 21–91', () => {
+    expect(currencyToWords('21', 'SAR', { case: 'accusative' })).toBe('واحداً وعشرين ريالاً سعودياً');
+  });
+});

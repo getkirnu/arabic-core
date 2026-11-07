@@ -92,6 +92,14 @@ export const TAFGEET_CASES: TafgeetCase[] = [
   { input: 20, options: { case: 'accusative' }, expected: 'عشرين', status: 'TODO-VERIFY' },
   { input: 200, options: { case: 'accusative' }, expected: 'مئتين', status: 'TODO-VERIFY' },
   { input: 2000, options: { case: 'genitive' }, expected: 'ألفين', status: 'TODO-VERIFY' },
+  // Accusative «واحد» takes tanween, standalone and as the unit of 21–91 (feminine unchanged unvocalised).
+  { input: 1, options: { case: 'accusative' }, expected: 'واحداً', status: 'TODO-VERIFY' },
+  { input: 1001, options: { case: 'accusative' }, expected: 'ألفاً وواحداً', status: 'TODO-VERIFY' },
+  { input: 21, options: { case: 'accusative' }, expected: 'واحداً وعشرين', status: 'TODO-VERIFY' },
+  { input: 31001, options: { case: 'accusative' }, expected: 'واحداً وثلاثين ألفاً وواحداً', status: 'TODO-VERIFY' },
+  { input: 1001, options: { case: 'accusative', gender: 'feminine' }, expected: 'ألفاً وواحدة', status: 'TODO-VERIFY' },
+  { input: 21, options: { case: 'accusative', gender: 'feminine' }, expected: 'إحدى وعشرين', status: 'TODO-VERIFY' },
+  { input: 1001, options: { case: 'genitive' }, expected: 'ألف وواحد', status: 'TODO-VERIFY' },
 
   // Spelling, cheque, input formats, fractions, sign
   { input: 300, options: { spelling: 'classic' }, expected: 'ثلاثمائة', status: 'TODO-VERIFY' },

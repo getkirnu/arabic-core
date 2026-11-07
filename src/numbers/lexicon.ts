@@ -77,7 +77,8 @@ function tens(t: number, c: GrammaticalCase): string {
 export function belowHundred(n: number, g: Gender, c: GrammaticalCase): string {
   const m = g === 'masculine';
   if (n === 0) return '';
-  if (n === 1) return m ? 'واحد' : 'واحدة';
+  // Accusative «واحداً» (standalone or as the unit of 21–91); the feminine «واحدة/إحدى» look the same unvocalised.
+  if (n === 1) return m ? (c === 'accusative' ? 'واحداً' : 'واحد') : 'واحدة';
   if (n === 2) return m ? (isNom(c) ? 'اثنان' : 'اثنين') : isNom(c) ? 'اثنتان' : 'اثنتين';
   if (n <= 10) return (m ? UNITS_FOR_MASC : UNITS_FOR_FEM)[n]!;
   if (n === 11) return m ? 'أحد عشر' : 'إحدى عشرة';
@@ -87,7 +88,7 @@ export function belowHundred(n: number, g: Gender, c: GrammaticalCase): string {
   const t = Math.floor(n / 10);
   const u = n % 10;
   if (u === 0) return tens(t, c);
-  const unit = u === 1 ? (m ? 'واحد' : 'إحدى') : belowHundred(u, g, c);
+  const unit = u === 1 && !m ? 'إحدى' : belowHundred(u, g, c);
   return unit + AND + tens(t, c);
 }
 
