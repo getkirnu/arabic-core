@@ -22,7 +22,9 @@ gregorianToHijri({ year: 2024, month: 3, day: 11 }); // { year: 1445, month: 9, 
 
 ### Try it online
 
-Every function is live on getkirnu.com, free and in the browser:
+Try the library itself in the [live demo on Hugging Face](https://huggingface.co/spaces/sahmedk/kirnu-arabic-core) (tafgeet, amounts, Hijri dates, tashkeel removal). A dataset generated with it, [Arabic numbers in words and the Umm al-Qura calendar](https://huggingface.co/datasets/sahmedk/arabic-numbers-words), is on Hugging Face too.
+
+Every function is also live on getkirnu.com, free and in the browser:
 
 | Function | Tool |
 |---|---|
